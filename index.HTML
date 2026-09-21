@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ShopZone - Online Store</title>
+
+    <style>
+
+        /* =========================
+           BASIC SETTINGS
+        ========================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f6fa;
+            color: #222;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================== */
+
+        nav {
+            background: #111827;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #38bdf8;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #38bdf8;
+        }
+
+
+        /* =========================
+           HERO SECTION
+        ========================== */
+
+        .hero {
+            min-height: 500px;
+            background: linear-gradient(
+                135deg,
+                #0f172a,
+                #1d4ed8
+            );
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+            color: white;
+            padding: 50px 20px;
+        }
+
+        .hero-content {
+            max-width: 750px;
+        }
+
+        .hero h1 {
+            font-size: 55px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #38bdf8;
+        }
+
+        .hero p {
+            font-size: 20px;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .shop-btn {
+            display: inline-block;
+            padding: 14px 30px;
+            background: #38bdf8;
+            color: #111827;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .shop-btn:hover {
+            background: white;
+            transform: translateY(-3px);
+        }
+
+
+        /* =========================
+           CATEGORY SECTION
+        ========================== */
+
+        .categories {
+            padding: 60px 7%;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 35px;
+            margin-bottom: 35px;
+        }
+
+        .category-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .category {
+            background: white;
+            padding: 25px;
+            width: 180px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+
+        .category:hover {
+            transform: translateY(-7px);
+        }
+
+        .category .icon {
+            font-size: 45px;
+            margin-bottom: 12px;
+        }
+
+        .category h3 {
+            color: #1d4ed8;
+        }
+
+
+        /* =========================
+           PRODUCTS
+        ========================== */
+
+        .products {
+            padding: 70px 7%;
+            background: #eef2ff;
+            text-align: center;
+        }
+
+        .product-container {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(230px, 1fr));
+
+            gap: 25px;
+        }
+
+
+        /* =========================
+           PRODUCT CARD
+        ========================== */
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.08);
+
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+
+            box-shadow:
+                0 12px 30px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            height: 220px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 90px;
+
+            background: #f8fafc;
+        }
+
+        .product-info {
+            padding: 20px;
+            text-align: left;
+        }
+
+        .product-info h3 {
+            font-size: 21px;
+            margin-bottom: 8px;
+        }
+
+        .product-info p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .price {
+            font-size: 22px;
+            color: #2563eb;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .buy-btn {
+            width: 100%;
+            border: none;
+            padding: 12px;
+
+            background: #2563eb;
+            color: white;
+
+            border-radius: 7px;
+
+            font-size: 15px;
+            font-weight: bold;
+
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .buy-btn:hover {
+            background: #1e40af;
+        }
+
+
+        /* =========================
+           SPECIAL OFFER
+        ========================== */
+
+        .offer {
+            padding: 70px 20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7c3aed,
+                    #2563eb
+                );
+
+            color: white;
+
+            text-align: center;
+        }
+
+        .offer h2 {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .offer p {
+            font-size: 18px;
+            margin-bottom: 25px;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            background: #111827;
+            color: white;
+
+            text-align: center;
+
+            padding: 30px 20px;
+        }
+
+        footer h2 {
+            color: #38bdf8;
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            color: #cbd5e1;
+        }
+
+
+        /* =========================
+           MOBILE RESPONSIVE
+        ========================== */
+
+        @media (max-width: 700px) {
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .offer h2 {
+                font-size: 30px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <nav>
+
+        <div class="logo">
+            ShopZone
+        </div>
+
+        <ul>
+            <li>
+                <a href="#home">Home</a>
+            </li>
+
+            <li>
+                <a href="#categories">Categories</a>
+            </li>
+
+            <li>
+                <a href="#products">Products</a>
+            </li>
+
+            <li>
+                <a href="#contact">Contact</a>
+            </li>
+        </ul>
+
+    </nav>
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <h1>
+                Welcome to
+                <span>ShopZone</span>
+            </h1>
+
+            <p>
+                Discover amazing products at affordable prices.
+                Shop electronics, fashion, shoes, watches and
+                many more products.
+            </p>
+
+            <a href="#products" class="shop-btn">
+                Shop Now
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CATEGORIES
+    ========================== -->
+
+    <section class="categories" id="categories">
+
+        <h2 class="section-title">
+            Product Categories
+        </h2>
+
+        <div class="category-container">
+
+            <div class="category">
+                <div class="icon">📱</div>
+                <h3>Electronics</h3>
+            </div>
+
+            <div class="category">
+                <div class="icon">👕</div>
+                <h3>Fashion</h3>
+            </div>
+
+            <div class="category">
+                <div class="icon">👟</div>
+                <h3>Shoes</h3>
+            </div>
+
+            <div class="category">
+                <div class="icon">⌚</div>
+                <h3>Watches</h3>
+            </div>
+
+            <div class="category">
+                <div class="icon">🎧</div>
+                <h3>Accessories</h3>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         PRODUCTS
+    ========================== -->
+
+    <section class="products" id="products">
+
+        <h2 class="section-title">
+            Popular Products
+        </h2>
+
+
+        <div class="product-container">
+
+
+            <!-- Product 1 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+                    📱
+                </div>
+
+                <div class="product-info">
+
+                    <h3>
+                        Smart Phone
+                    </h3>
+
+                    <p>
+                        Modern smartphone with
+                        powerful performance.
+                    </p>
+
+                    <div class="price">
+                        ₨83,720
+                    </div>
+
+                    <button class="buy-btn">
+                        Add to Cart
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Product 2 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+                    💻
+                </div>
+
+                <div class="product-info">
+
+                    <h3>
+                        Laptop
+                    </h3>
+
+                    <p>
+                        Fast and powerful laptop
+                        for work and study.
+                    </p>
+
+                    <div class="price">
+                        ₨223,720
+                    </div>
+
+                    <button class="buy-btn">
+                        Add to Cart
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Product 3 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+                    🎧
+                </div>
+
+                <div class="product-info">
+
+                    <h3>
+                        Wireless Headphones
+                    </h3>
+
+                    <p>
+                        Enjoy high quality sound
+                        with wireless headphones.
+                    </p>
+
+                    <div class="price">
+                        ₨16,520
+                    </div>
+
+                    <button class="buy-btn">
+                        Add to Cart
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Product 4 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+                    ⌚
+                </div>
+
+                <div class="product-info">
+
+                    <h3>
+                        Smart Watch
+                    </h3>
+
+                    <p>
+                        Stylish smartwatch with
+                        modern features.
+                    </p>
+
+                    <div class="price">
+                        ₨27,720
+                    </div>
+
+                    <button class="buy-btn">
+                        Add to Cart
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Product 5 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+                    👟
+                </div>
+
+                <div class="product-info">
+
+                    <h3>
+                        Running Shoes
+                    </h3>
+
+                    <p>
+                        Comfortable shoes for
+                        running and daily use.
+                    </p>
+
+                    <div class="price">
+                        ₨21,000
+                    </div>
+
+                    <button class="buy-btn">
+                        Add to Cart
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Product 6 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+                    🎒
+                </div>
+
+                <div class="product-info">
+
+                    <h3>
+                        Backpack
+                    </h3>
+
+                    <p>
+                        Stylish and spacious backpack
+                        for everyday use.
+                    </p>
+
+                    <div class="price">
+                        ₨12,600
+                    </div>
+
+                    <button class="buy-btn">
+                        Add to Cart
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Product 7 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+                    👕
+                </div>
+
+                <div class="product-info">
+
+                    <h3>
+                        T-Shirt
+                    </h3>
+
+                    <p>
+                        Comfortable cotton t-shirt
+                        with modern design.
+                    </p>
+
+                    <div class="price">
+                        ₨7,000
+                    </div>
+
+                    <button class="buy-btn">
+                        Add to Cart
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Product 8 -->
+
+            <div class="product-card">
+
+                <div class="product-image">
+                    🕶️
+                </div>
+
+                <div class="product-info">
+
+                    <h3>
+                        Sunglasses
+                    </h3>
+
+                    <p>
+                        Stylish sunglasses with
+                        a modern premium look.
+                    </p>
+
+                    <div class="price">
+                        ₨9,800
+                    </div>
+
+                    <button class="buy-btn">
+                        Add to Cart
+                    </button>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         SPECIAL OFFER
+    ========================== -->
+
+    <section class="offer">
+
+        <h2>
+            Special Offer 🎉
+        </h2>
+
+        <p>
+            Get up to 30% OFF on selected products!
+        </p>
+
+        <a href="#products" class="shop-btn">
+            Explore Deals
+        </a>
+
+    </section>
+
+
+    <!-- =========================
+         CONTACT
+    ========================== -->
+
+    <section id="contact">
+
+        <h2 class="section-title">
+            Contact Us
+        </h2>
+
+        <p>
+            Have a question? Contact our support team.
+        </p>
+
+        <br>
+
+        <a
+            href="mailto:shopzone@example.com"
+            class="shop-btn"
+        >
+            Email Us
+        </a>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <h2>
+            ShopZone
+        </h2>
+
+        <p>
+            © 2026 ShopZone. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+</body>
+</html>
